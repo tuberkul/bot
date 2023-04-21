@@ -32,7 +32,7 @@ const reminder = function(context, array) {
         let dateInput = new Date(year, mouth, day, hour, min);
         let curDate = new Date()
         // var today = new Date();
-        let counter = 0;
+        let counter = 1;
         let timer = setInterval(function(){
             curDate = new Date()
             var dd = String(curDate.getDate()).padStart(2, '0');
@@ -52,7 +52,7 @@ const reminder = function(context, array) {
                 )
                 }
                 clearInterval(timer);
-            } else if (Math.round((dateInput - curDate)/60000) <= 15) {
+            } else if (Math.round((dateInput - curDate)/60000) <= 15 && counter === 1) {
                 // && minutes <= min - 30
                 for (let i = 1; i < array.length; i++) {
                     context.telegram.sendMessage(
