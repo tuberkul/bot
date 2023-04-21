@@ -52,7 +52,7 @@ const reminder = function(context, array) {
                 )
                 }
                 clearInterval(timer);
-            } else if (Math.round((dateInput - curDate)/60000) <= 15 && counter == 1) {
+            } else if (Math.round((dateInput - curDate)/60000) <= 15) {
                 // && minutes <= min - 30
                 for (let i = 1; i < array.length; i++) {
                     context.telegram.sendMessage(
@@ -64,19 +64,6 @@ const reminder = function(context, array) {
                     );
                 }
                 counter = 2;
-            } else if (Math.round((dateInput - curDate)/60000) <= 30 && counter == 0) {
-                for (let i = 1; i < array.length; i++) {
-                    context.telegram.sendMessage(
-                        array[i][0],
-`⚡️ <b>Уже через полчаса</b> на нашем стенде состоится розыгрыш ценных призов.
-
-У вас еще есть время ответить на вопросы квиза и стать участником розыгрыша. Ждем вас на нашем стенде!`,
-{
-    parse_mode: "HTML"
-}
-                    );
-                }
-                counter = 1;
             }
         }, 60000);    
     }
