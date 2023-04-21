@@ -40,31 +40,22 @@ const reminder = function(context, array) {
             var yyyy = curDate.getFullYear();
             var hh = curDate.getHours();
             var minutes = curDate.getMinutes();
-            if (dateInput.getTime() <= curDate.getTime()) {
-                for (let i = 1; i < array.length; i++) {
-                     context.telegram.sendPhoto(array[i][0],{ source: './img/8.jpg' },
-                    {
-                        caption: `
-🔥 <b>Мы уже начали лоттерею!</b>
-Ждем вас! Может быть именно вы заберете один из наших ценных призов!`,
-                        parse_mode: 'HTML'
-                    }
-                )
-                }
-                clearInterval(timer);
-            } else if (Math.round((dateInput - curDate)/60000) <= 15 && counter === 1) {
-                // && minutes <= min - 30
-                for (let i = 1; i < array.length; i++) {
-                    context.telegram.sendMessage(
-                        array[i][0],
-                        '<b>Через 15 минут</b> мы разыграем ценные призы среди тех, кто ответил на вопросы квиза. Ждем вас у нашего стенда. 💚',
-                        {
-                            parse_mode: "HTML"
-                        }
-                    );
-                }
-                counter = 2;
-            }
+//             if (dateInput.getTime() <= curDate.getTime()) {
+//                 for (let i = 1; i < array.length; i++) {
+//                      context.telegram.sendPhoto(array[i][0],{ source: './img/8.jpg' },
+//                     {
+//                         caption: `
+// 🔥 <b>Мы уже начали лоттерею!</b>
+// Ждем вас! Может быть именно вы заберете один из наших ценных призов!`,
+//                         parse_mode: 'HTML'
+//                     }
+//                 )
+//                 }
+//                 clearInterval(timer);
+//             }
+            console.log(array);
+            console.log(array.length);
+            console.log(Math.round((dateInput - curDate)/60000));
         }, 60000);    
     }
 }
@@ -120,7 +111,7 @@ const postData = async (ctx) => {
     })
 }
 bot.start(async ctx => {
-    const array = await getData()
+    // const array = await getData()
     postData(ctx)
     ctx.replyWithPhoto({ source: './img/1.jpg' },
     {
@@ -140,7 +131,7 @@ bot.start(async ctx => {
                 `, getMainMenu())
     })
     // getMainMenu()
-    reminder(ctx, array)
+    // reminder(ctx, array)
     perem++;
 })
 
